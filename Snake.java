@@ -16,13 +16,15 @@ public class Snake {
 		head.setCellType(CellType.SNAKE_NODE);
 	}
 
-	public void grow() { snakePartList.add(head); }
+    //Para hacer crecer la  serpiente  se agrega una cabeza 
+	public void grow() { snakePartList.add(head); } 
 
 	public void move(Cell nextCell)
 	{
 		System.out.println("Snake is moving to "
 						+ nextCell.getRow() + " "
 						+ nextCell.getCol());
+                        
 		Cell tail = snakePartList.removeLast();
 		tail.setCellType(CellType.EMPTY);
 
