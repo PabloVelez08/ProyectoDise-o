@@ -1,5 +1,4 @@
 public class Board {
-      
     final int ROW_COUNT, COL_COUNT;
     private Cell[][] cells;
  
@@ -15,7 +14,7 @@ public class Board {
             }
         }
     }
- 
+    
     public Cell[][] getCells()
     {
         return cells;
@@ -37,5 +36,5 @@ public class Board {
         }
         cells[row][column].setCellType(CellType.FOOD);
         System.out.println("Food is generated at: " + row + " " + column);
-    } 
+    }  
 }
