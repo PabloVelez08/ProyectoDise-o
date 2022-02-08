@@ -33,8 +33,10 @@ public class Board {
             int column = (int)(Math.random() * COL_COUNT);
             if(cells[row][column].getCellType()!=CellType.SNAKE_NODE)
                  break;
-        }
+        
         cells[row][column].setCellType(CellType.FOOD);
         System.out.println("Food is generated at: " + row + " " + column);
+        }
+
     }
 }
