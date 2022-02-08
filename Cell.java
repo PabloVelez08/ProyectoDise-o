@@ -9,7 +9,7 @@ public class Cell {
 		this.row = row;
 		this.col = col;
 	}
-	/////Kevin
+	
 	public CellType getCellType()
 	{
 		return cellType;
