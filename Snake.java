@@ -1,11 +1,10 @@
 
-// Clase que representa a la serpierte
+// Clase que representa a la serpiente
 import java.util.LinkedList;
 
 public class Snake {
     // La Snake  estara formada por una lista enlazada de celdas 
-	private LinkedList<Cell> snakePartList
-		= new LinkedList<>();
+	private LinkedList<Cell> snakePartList = new LinkedList<>();
 
 	private Cell head; // Celda de inicio de snake 
 
