@@ -17,15 +17,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JFrame;
 
-public class Frame extends JFrame{
+public class Board extends JFrame{
     Pointer point;
     Image OSC;
     PointerInfo a = MouseInfo.getPointerInfo();
 
-        public Frame(String s){
+        public Board(String s){
             super(s);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setBounds(0, 0, 1200, 1200);
+            setBounds(0, 0, 1000, 1000);
             setLayout(new FlowLayout());
             setBackground(Color.blue);
             //addMouseListener(new MyMouseSensor());
@@ -53,7 +53,7 @@ public class Frame extends JFrame{
         }
 
         public void paintOffscreen(Graphics g) {
-            g.clearRect(0, 0, 900, 900);
+            g.clearRect(0, 0, 600, 600);
             Point first = new Point();
             Point last = point.snake.get(0);
             g.setColor(Color.black); // color punto

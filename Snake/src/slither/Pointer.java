@@ -1,6 +1,6 @@
 package slither;
 
-import slither.Frame;
+import slither.Board;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Pointer extends Thread{
-    Frame frame;
+    Board frame;
     ArrayList<Point> snake;
     ArrayList<Point> foods;
     PointerInfo a = MouseInfo.getPointerInfo();
