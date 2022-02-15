@@ -1,4 +1,4 @@
-package slither;
+package Snake;
 
 public class Main {
 

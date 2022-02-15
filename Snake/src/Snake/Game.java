@@ -1,7 +1,7 @@
-package slither;
+package Snake;
 
 
-import slither.Board;
+import Snake.Board;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -20,19 +20,18 @@ public class Game {
         r = new Random();
         board = new Board("slitherio");
         
-        board.point = point;    //Vinculación
+        board.point = point; 
         point.board = board;
-        point.snake = new ArrayList<>();
         
+        point.snake = new ArrayList<>();
         point.foods = new ArrayList<>();
         point.snake.add(new Point(500, 500));
-        //Punto s = ;
+
         point.start();
-        System.out.println("Comida"+point.foods);
     }
     
     public void obtenerPuntaje(){
-        
+        System.out.println("Puntaje por comida" + point.count);
     }
     
     public void finishGame(){

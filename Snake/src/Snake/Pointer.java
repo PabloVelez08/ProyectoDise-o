@@ -1,6 +1,6 @@
-package slither;
+package Snake;
 
-import slither.Board;
+import Snake.Board;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -17,6 +17,7 @@ public class Pointer extends Thread{
     int size = 10;
     int speed = 10;
     static final Random r = new Random();
+    int count;
         public void run(){
             int count = 0;
             while(true){
@@ -25,7 +26,7 @@ public class Pointer extends Thread{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(foods.size() < 500){
+                if(foods.size() < 100){
                     foods.add(new Point(r.nextInt(900), r.nextInt(900))); //Randómico de coordenadas
                 }
                 a = MouseInfo.getPointerInfo();
@@ -34,7 +35,6 @@ public class Pointer extends Thread{
                 Point n = new Point();
                 if(last.distance(p) > 1){
                     n = move(last, p);
-                    count=count+1;
                     snake.add(n);
                     if(snake.size() >= size){
                         for(int i = 0; i < snake.size() - size; i++){
@@ -49,11 +49,12 @@ public class Pointer extends Thread{
                     Point food = i.next();
                     if(food.distance(n) < 20){
                         i.remove();
+                        count+=count;
                         size++;
                     }
                 }
                 board.repaint();
-                System.out.println("PuntajeComida"+count);
+                //System.out.println("Puntaje por Comida "+count);
             }
 
         }

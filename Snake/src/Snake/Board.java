@@ -1,5 +1,5 @@
-package slither;
-import slither.Pointer;
+package Snake;
+import Snake.Pointer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
