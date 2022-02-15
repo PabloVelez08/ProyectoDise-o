@@ -54,7 +54,7 @@ public class Pointer extends Thread{
                     }
                 }
                 board.repaint();
-                //System.out.println("Puntaje por Comida "+count);
+                System.out.println("Puntaje por Comida "+count);
             }
 
         }
