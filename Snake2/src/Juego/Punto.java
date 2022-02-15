@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Punto extends Thread{
     Frame frame;
-    ArrayList<Point> serpiente;
+    ArrayList<Point> snake;
     ArrayList<Point> foods;
     PointerInfo a = MouseInfo.getPointerInfo();
     int size = 10;
@@ -29,14 +29,14 @@ public class Punto extends Thread{
                 }
                 a = MouseInfo.getPointerInfo();
                 Point p = a.getLocation();
-                Point last = serpiente.get(serpiente.size() - 1);
+                Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
                 if(last.distance(p) > 1){
                     n = calcCoor(last, p);
-                    serpiente.add(n);
-                    if(serpiente.size() >= size){
-                        for(int i = 0; i < serpiente.size() - size; i++){
-                            serpiente.remove(i);
+                    snake.add(n);
+                    if(snake.size() >= size){
+                        for(int i = 0; i < snake.size() - size; i++){
+                            snake.remove(i);
                         }
                     }
                     System.out.println(n+"prueba");
@@ -71,11 +71,11 @@ public class Punto extends Thread{
         }
 
     public ArrayList<Point> getSerpiente() {
-        return serpiente;
+        return snake;
     }
 
     public void setSerpiente(ArrayList<Point> serpiente) {
-        this.serpiente = serpiente;
+        this.snake = serpiente;
     }
 
     public ArrayList<Point> getFoods() {

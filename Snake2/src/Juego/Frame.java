@@ -54,13 +54,13 @@ public class Frame extends JFrame{
         public void paintOffscreen(Graphics g) {
             g.clearRect(0, 0, 900, 900);
             Point first = new Point();
-            Point last = punto.serpiente.get(0);
+            Point last = punto.snake.get(0);
             g.setColor(Color.black); // color punto
             Graphics2D g2 = (Graphics2D) g;
             //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(9 + (float) punto.getSerpiente().size() /20)); // aumenta el grosor
-            for(int i = 1; i < punto.serpiente.size(); i++){
-                first = punto.serpiente.get(i);
+            for(int i = 1; i < punto.snake.size(); i++){
+                first = punto.snake.get(i);
                 g2.drawLine(first.x, first.y, last.x, last.y);
                 last = new Point(first);
             }

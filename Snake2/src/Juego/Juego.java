@@ -11,21 +11,21 @@ import java.util.Random;
 
 public class Juego {
     Frame frame;
-    Punto punto;
+    Punto point;
     Random r;
     public void startGame(){
         
-        punto = new Punto();    
+        point = new Punto();    
         r = new Random();
         frame = new Frame("slitherio");
         
-        frame.punto = punto;    //Vinculación
-        punto.frame = frame;
-        punto.serpiente = new ArrayList<>();
+        frame.punto = point;    //Vinculación
+        point.frame = frame;
+        point.snake = new ArrayList<>();
         
-        punto.foods = new ArrayList<>();
-        punto.serpiente.add(new Point(500, 500));
+        point.foods = new ArrayList<>();
+        point.snake.add(new Point(500, 500));
         //Punto s = ;
-        punto.start();
+        point.start();
     }
 }
