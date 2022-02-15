@@ -1,5 +1,6 @@
-package Juego;
+package slither;
 
+import slither.Frame;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Punto extends Thread{
+public class Pointer extends Thread{
     Frame frame;
     ArrayList<Point> snake;
     ArrayList<Point> foods;

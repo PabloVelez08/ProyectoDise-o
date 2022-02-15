@@ -1,6 +1,7 @@
-package Juego;
+package slither;
 
-///PRUEBAKEVIN**********
+
+import slither.Pointer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +18,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 public class Frame extends JFrame{
-    Punto punto;
+    Pointer point;
     Image OSC;
     PointerInfo a = MouseInfo.getPointerInfo();
 
@@ -54,19 +55,19 @@ public class Frame extends JFrame{
         public void paintOffscreen(Graphics g) {
             g.clearRect(0, 0, 900, 900);
             Point first = new Point();
-            Point last = punto.snake.get(0);
+            Point last = point.snake.get(0);
             g.setColor(Color.black); // color punto
             Graphics2D g2 = (Graphics2D) g;
             //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setStroke(new BasicStroke(9 + (float) punto.getSerpiente().size() /20)); // aumenta el grosor
-            for(int i = 1; i < punto.snake.size(); i++){
-                first = punto.snake.get(i);
+            g2.setStroke(new BasicStroke(9 + (float) point.getSerpiente().size() /20)); // aumenta el grosor
+            for(int i = 1; i < point.snake.size(); i++){
+                first = point.snake.get(i);
                 g2.drawLine(first.x, first.y, last.x, last.y);
                 last = new Point(first);
             }
-            g2.setColor(Color.red);//color de la comida
-            for(int i = 0; i < punto.foods.size(); i++){
-                g2.fillOval(punto.foods.get(i).x, punto.foods.get(i).y,  20, 20); //ancho y alto de la comida
+            g2.setColor(Color.GREEN);//color de la comida
+            for(int i = 0; i < point.foods.size(); i++){
+                g2.fillOval(point.foods.get(i).x, point.foods.get(i).y,  20, 20); //ancho y alto de la comida
             }
         }
     }
