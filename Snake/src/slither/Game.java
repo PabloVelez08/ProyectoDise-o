@@ -21,12 +21,22 @@ public class Game {
         board = new Board("slitherio");
         
         board.point = point;    //Vinculación
-        point.frame = board;
+        point.board = board;
         point.snake = new ArrayList<>();
         
         point.foods = new ArrayList<>();
         point.snake.add(new Point(500, 500));
         //Punto s = ;
         point.start();
+        System.out.println("Comida"+point.foods);
     }
+    
+    public void obtenerPuntaje(){
+        
+    }
+    
+    public void finishGame(){
+        board.controlSize();
+    }
+    
 }

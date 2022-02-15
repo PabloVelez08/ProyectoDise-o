@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Pointer extends Thread{
-    Board frame;
+    Board board;
     ArrayList<Point> snake;
     ArrayList<Point> foods;
     PointerInfo a = MouseInfo.getPointerInfo();
@@ -18,7 +18,7 @@ public class Pointer extends Thread{
     int speed = 10;
     static final Random r = new Random();
         public void run(){
-            System.out.println(foods);//***************
+            int count = 0;
             while(true){
                 try {
                     Thread.sleep(50);
@@ -33,14 +33,16 @@ public class Pointer extends Thread{
                 Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
                 if(last.distance(p) > 1){
-                    n = calcCoor(last, p);
+                    n = move(last, p);
+                    count=count+1;
                     snake.add(n);
                     if(snake.size() >= size){
                         for(int i = 0; i < snake.size() - size; i++){
                             snake.remove(i);
                         }
                     }
-                    System.out.println(n+"prueba");
+                   // System.out.println(n+"prueba");
+                    
                 }
                 Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
@@ -50,11 +52,12 @@ public class Pointer extends Thread{
                         size++;
                     }
                 }
-                frame.repaint();
+                board.repaint();
+                System.out.println("PuntajeComida"+count);
             }
 
         }
-        public Point calcCoor(Point last, Point mouse){
+        public Point move(Point last, Point mouse){
             double degree = 0;
             if(last.x < mouse.x && last.y < mouse.y){
                 degree = 360 - Math.toDegrees(Math.atan((double) (mouse.y - last.y) / (mouse.x - last.x)));
@@ -94,6 +97,6 @@ public class Pointer extends Thread{
     public void setA(PointerInfo a) {
         this.a = a;
     }
-        
+    
     }
 

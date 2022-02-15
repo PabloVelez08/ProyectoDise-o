@@ -1,6 +1,4 @@
 package slither;
-
-
 import slither.Pointer;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -20,7 +18,6 @@ import javax.swing.JFrame;
 public class Board extends JFrame{
     Pointer point;
     Image OSC;
-    PointerInfo a = MouseInfo.getPointerInfo();
 
         public Board(String s){
             super(s);
@@ -43,7 +40,7 @@ public class Board extends JFrame{
             paintOffscreen(OSC.getGraphics());
             g.drawImage(OSC, 0, 0, null);
         }
-
+        
         private void checkOffscreenImage() {
             Dimension d = getSize();
             if (OSC == null || OSC.getWidth(null) != d.width
@@ -70,5 +67,12 @@ public class Board extends JFrame{
                 g2.fillOval(point.foods.get(i).x, point.foods.get(i).y,  20, 20); //ancho y alto de la comida
             }
         }
+        
+        public void controlSize(){
+        if(this.point.snake.size()>10){
+            this.setVisible(false);
+        }
+    }
+        
     }
 
