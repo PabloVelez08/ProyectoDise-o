@@ -1,6 +1,6 @@
 package Snake;
 
-public class Main {
+public class SnakeGame {
 
     public static void main(String[] args) {
         Game c = new Game();

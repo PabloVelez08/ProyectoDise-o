@@ -28,9 +28,10 @@ public class Game {
         point.snake.add(new Point(500, 500));
 
         point.start();
+        finishGame();
     }
     
-    public void obtenerPuntaje(){
+    public void getScore(){
         System.out.println("Puntaje por comida" + point.count);
     }
     

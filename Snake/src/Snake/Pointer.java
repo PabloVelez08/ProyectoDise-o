@@ -17,48 +17,67 @@ public class Pointer extends Thread{
     int size = 10;
     int speed = 10;
     static final Random r = new Random();
-    int count;
+    int count=0;
+    
+    @Override
         public void run(){
-            int count = 0;
             while(true){
+
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(foods.size() < 100){
-                    foods.add(new Point(r.nextInt(900), r.nextInt(900))); //Randómico de coordenadas
-                }
+                checkFood();
                 a = MouseInfo.getPointerInfo();
                 Point p = a.getLocation();
                 Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
+                showLocationHead(last); 
+                move(last, p, n);                                                  
+            }
+        }
+        
+        public void move(Point last, Point p, Point n){   
                 if(last.distance(p) > 1){
-                    n = move(last, p);
+                    n = calculateCoord(last, p);
                     snake.add(n);
+                    //count++;
                     if(snake.size() >= size){
                         for(int i = 0; i < snake.size() - size; i++){
                             snake.remove(i);
                         }
                     }
-                   // System.out.println(n+"prueba");
-                    
                 }
-                Iterator<Point> i = foods.iterator();
+                delete(n);
+        }
+        
+        
+        public void showLocationHead(Point last){
+            System.out.println(last.x +" | "+last.y);
+        }
+        
+        public void checkFood(){
+            if(foods.size() < 100){
+                    foods.add(new Point(r.nextInt(900), r.nextInt(900))); //Randómico de coordenadas
+                }
+        }
+        public void delete(Point n){
+            
+            Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
                     Point food = i.next();
                     if(food.distance(n) < 20){
                         i.remove();
-                        count+=count;
+                        count++;
                         size++;
                     }
                 }
                 board.repaint();
-                System.out.println("Puntaje por Comida "+count);
-            }
-
+               // System.out.println("Puntaje por Comida "+count);
         }
-        public Point move(Point last, Point mouse){
+        
+        public Point calculateCoord(Point last, Point mouse){
             double degree = 0;
             if(last.x < mouse.x && last.y < mouse.y){
                 degree = 360 - Math.toDegrees(Math.atan((double) (mouse.y - last.y) / (mouse.x - last.x)));
