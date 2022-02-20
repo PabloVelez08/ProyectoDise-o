@@ -1,10 +1,10 @@
 package Snake;
 
-import Snake.Board;
-import java.awt.Image;
+import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -16,28 +16,30 @@ public class Pointer extends Thread{
     PointerInfo a = MouseInfo.getPointerInfo();
     int size = 10;
     int speed = 10;
+    Color color=Color.BLUE;
     static final Random r = new Random();
     int count=0;
-    
+
     @Override
         public void run(){
             while(true){
-
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                checkFood();
                 a = MouseInfo.getPointerInfo();
                 Point p = a.getLocation();
                 Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
                 showLocationHead(last); 
-                move(last, p, n);                                                  
+                move(last, p, n);  
+                checkVelocity();
+                checkFood();
             }
         }
-        
+ 
+                
         public void move(Point last, Point p, Point n){   
                 if(last.distance(p) > 1){
                     n = calculateCoord(last, p);
@@ -52,6 +54,21 @@ public class Pointer extends Thread{
                 delete(n);
         }
         
+        public Color checkVelocity(){
+           board.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+                    speed=30;
+                    color=Color.RED;
+            }
+                if(evt.getKeyCode()!=KeyEvent.VK_SPACE){
+                    speed=10;
+                    color=Color.BLUE;
+            }   
+                }
+                }); 
+           return color;
+        }
         
         public void showLocationHead(Point last){
             System.out.println(last.x +" | "+last.y);
@@ -63,7 +80,6 @@ public class Pointer extends Thread{
                 }
         }
         public void delete(Point n){
-            
             Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
                     Point food = i.next();
@@ -94,11 +110,11 @@ public class Pointer extends Thread{
             return p;
         }
 
-    public ArrayList<Point> getSerpiente() {
+    public ArrayList<Point> getSnake() {
         return snake;
     }
 
-    public void setSerpiente(ArrayList<Point> serpiente) {
+    public void setSnake(ArrayList<Point> serpiente) {
         this.snake = serpiente;
     }
 
@@ -116,6 +132,14 @@ public class Pointer extends Thread{
 
     public void setA(PointerInfo a) {
         this.a = a;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
     
     }
