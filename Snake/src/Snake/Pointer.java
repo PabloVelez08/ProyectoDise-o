@@ -8,11 +8,14 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import javax.swing.JFrame;
 
 public class Pointer extends Thread{
     Board board;
+    Crash crash;
     ArrayList<Point> snake;
     ArrayList<Point> foods;
+    ArrayList<Point> enemy;
     PointerInfo a = MouseInfo.getPointerInfo();
     int size = 10;
     int speed = 10;
@@ -22,40 +25,69 @@ public class Pointer extends Thread{
 
     @Override
         public void run(){
+            crash = new Crash();
             while(true){
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                a = MouseInfo.getPointerInfo();
+                generateSnake();  
+                generateEnemy();
+                checkFood();
+                checkBorder();
+                deleteSnakes();
+                }
+        }
+        
+        public void generateSnake(){
+            a = MouseInfo.getPointerInfo();
                 Point p = a.getLocation();
                 Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
                 showLocationHead(last); 
-                move(last, p, n);  
-                checkVelocity();
-                checkFood();
-            }
-        }
- 
-                
-        public void move(Point last, Point p, Point n){   
-                if(last.distance(p) > 1){
-                    n = calculateCoord(last, p);
-                    snake.add(n);
-                    //count++;
-                    if(snake.size() >= size){
-                        for(int i = 0; i < snake.size() - size; i++){
-                            snake.remove(i);
-                        }
-                    }
-                }
-                delete(n);
+                move(snake, last, p, n); 
         }
         
-        public Color checkVelocity(){
+        public void generateEnemy(){
+                Point pEn = new Point(r.nextInt(900)+50, r.nextInt(900)+50);
+                Point lastEn = enemy.get(enemy.size() - 1);
+                Point nEn = new Point(); 
+                move(enemy,lastEn, pEn, nEn);  
+        }
+        
+        public void deleteSnakes(){
+          if(crash.checkCrashSnake(snake, enemy)==true){
+                            for(int i=0; i<enemy.size();i++){
+                                Point dead = new Point();
+                                dead = enemy.get(i);
+                                foods.add(dead);
+                            }
+                            enemy.clear();
+                            enemy.add(new Point(r.nextInt(900), r.nextInt(900)));
+                }  
+          if(crash.checkMyCrash(snake, enemy)==true){
+              for(int i=0; i<snake.size();i++){
+                                Point dead = new Point();
+                                dead = snake.get(i);
+                                foods.add(dead);
+                            }
+                            snake.clear();
+                            snake.add(new Point(r.nextInt(900), r.nextInt(900)));
+          }
+        }
+        
+        public void checkBorder(){
+            if(snake.get(snake.size() - 1).x<15 || snake.get(snake.size() - 1).y<44
+                    ||snake.get(snake.size() - 1).x>996||snake.get(snake.size() - 1).y>985){
+                System.exit(0);
+            }
+        }
+        
+ 
+        public Color checkSpeed(){
            board.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                     speed=30;
@@ -69,6 +101,20 @@ public class Pointer extends Thread{
                 }); 
            return color;
         }
+                
+        public void move(ArrayList b,Point last, Point p, Point n){   
+                if(last.distance(p) > 1){
+                    n = calculateCoord(last, p);
+                    b.add(n);
+                    //count++;
+                    if(b.size() >= size){
+                        for(int i = 0; i < b.size() - size; i++){
+                            b.remove(i);
+                        }
+                    }
+                }
+                deleteFood(n);
+        }
         
         public void showLocationHead(Point last){
             System.out.println(last.x +" | "+last.y);
@@ -79,7 +125,8 @@ public class Pointer extends Thread{
                     foods.add(new Point(r.nextInt(900), r.nextInt(900))); //Randómico de coordenadas
                 }
         }
-        public void delete(Point n){
+        
+        public void deleteFood(Point n){
             Iterator<Point> i = foods.iterator();
                 while(i.hasNext()){
                     Point food = i.next();
@@ -117,30 +164,15 @@ public class Pointer extends Thread{
     public void setSnake(ArrayList<Point> serpiente) {
         this.snake = serpiente;
     }
-
-    public ArrayList<Point> getFoods() {
-        return foods;
+    public ArrayList<Point> getEnemy() {
+        return enemy;
     }
 
-    public void setFoods(ArrayList<Point> foods) {
-        this.foods = foods;
+    public void setEnemy(ArrayList<Point> serpiente) {
+        this.enemy = enemy;
     }
 
-    public PointerInfo getA() {
-        return a;
-    }
 
-    public void setA(PointerInfo a) {
-        this.a = a;
-    }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-    
     }
 
