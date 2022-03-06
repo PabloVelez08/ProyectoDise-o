@@ -33,10 +33,10 @@ public class Pointer extends Thread{
                     e.printStackTrace();
                 }
                 generateSnake();  
-                generateEnemy();
+                //generateEnemy();
                 checkFood();
                 checkBorder();
-                deleteSnakes();
+                //deleteSnakes();
                 }
         }
         
@@ -48,7 +48,7 @@ public class Pointer extends Thread{
                 showLocationHead(last); 
                 move(snake, last, p, n); 
         }
-        
+        /*
         public void generateEnemy(){
                 Point pEn = new Point(r.nextInt(900)+50, r.nextInt(900)+50);
                 Point lastEn = enemy.get(enemy.size() - 1);
@@ -75,7 +75,7 @@ public class Pointer extends Thread{
                             snake.clear();
                             snake.add(new Point(r.nextInt(900), r.nextInt(900)));
           }
-        }
+        }*/
         
         public void checkBorder(){
             if(snake.get(snake.size() - 1).x<15 || snake.get(snake.size() - 1).y<44
@@ -164,15 +164,13 @@ public class Pointer extends Thread{
     public void setSnake(ArrayList<Point> serpiente) {
         this.snake = serpiente;
     }
+    /*
     public ArrayList<Point> getEnemy() {
         return enemy;
     }
 
     public void setEnemy(ArrayList<Point> serpiente) {
         this.enemy = enemy;
-    }
-
-
-
+        }*/
     }
 

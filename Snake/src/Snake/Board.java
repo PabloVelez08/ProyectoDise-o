@@ -27,17 +27,15 @@ public class Board extends JFrame{
             setLayout(new FlowLayout());
             setBackground(Color.ORANGE);//Color Fondo
             setVisible(true);
-
         }
 
-        
         public void paint(Graphics g) {
             Dimension d = getSize();
             checkOffscreenImage();
             Graphics offG = OSC.getGraphics();
-            offG.setColor(Color.ORANGE); //Color Fondo
+            offG.setColor(Color.BLACK); //Color Fondo
             offG.fillRect(0, 0, d.width, d.height);
-            paintOffscreen(OSC.getGraphics(), OSC.getGraphics(), Color.GREEN);
+            paintOffscreen(OSC.getGraphics(), OSC.getGraphics(), Color.GREEN);//COLOR SERPIENTE
             g.drawImage(OSC, 0, 0, null);
         }
         
@@ -55,18 +53,18 @@ public class Board extends JFrame{
             //snake
             Point first = new Point();  
             Point last = point.snake.get(0);
-            gSn.setColor(point.checkSpeed()); // color punto
+            gSn.setColor(point.checkSpeed()); 
             
             //enemy
             Point firstEn = new Point();
             Point lastEn = point.enemy.get(0);
-            gEn.setColor(Color.black);
+            gEn.setColor(Color.black);//COLOR ENEMIGO
 
             Graphics2D g2 = (Graphics2D) gSn;
             Graphics2D g3 = (Graphics2D) gEn;
             
             g2.setStroke(new BasicStroke(9 + (float) point.getSnake().size() /60)); // aumenta el grosor
-            g3.setStroke(new BasicStroke(9 + (float) point.getEnemy().size() /20)); // aumenta el grosor
+            //g3.setStroke(new BasicStroke(9 + (float) point.getEnemy().size() /20)); // aumenta el grosor
             //snake
             for(int i = 1; i < point.snake.size(); i++){
                 first = point.snake.get(i);
