@@ -1,5 +1,6 @@
-package Snake;
+package Copias;
 
+import Snake.*;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -8,11 +9,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-import javax.swing.JFrame;
 
-public class Pointer extends Thread{
+public class Pointer extends Thread{    
     Board board;
     Crash crash;
+    Snake22 snk;
     ArrayList<Point> snake;
     ArrayList<Point> foods;
     ArrayList<Point> enemy;
@@ -22,7 +23,7 @@ public class Pointer extends Thread{
     Color color=Color.BLUE;
     static final Random r = new Random();
     int count=0;
-
+    
     @Override
         public void run(){
             crash = new Crash();
@@ -32,10 +33,12 @@ public class Pointer extends Thread{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                generateSnake();  
+                
+                generateSnake();
+
                 //generateEnemy();
-                checkFood();
-                checkBorder();
+                //checkFood();
+                //checkBorder();
                 //deleteSnakes();
                 }
         }
@@ -45,10 +48,11 @@ public class Pointer extends Thread{
                 Point p = a.getLocation();
                 Point last = snake.get(snake.size() - 1);
                 Point n = new Point();
-                showLocationHead(last); 
+                //showLocationHead(last); 
                 move(snake, last, p, n); 
         }
-        /*
+        
+        
         public void generateEnemy(){
                 Point pEn = new Point(r.nextInt(900)+50, r.nextInt(900)+50);
                 Point lastEn = enemy.get(enemy.size() - 1);
@@ -56,8 +60,8 @@ public class Pointer extends Thread{
                 move(enemy,lastEn, pEn, nEn);  
         }
         
-        public void deleteSnakes(){
-          if(crash.checkCrashSnake(snake, enemy)==true){
+        public void drop(){
+          if(crash.checkEnemyCrash(snake, enemy)==true){
                             for(int i=0; i<enemy.size();i++){
                                 Point dead = new Point();
                                 dead = enemy.get(i);
@@ -66,7 +70,7 @@ public class Pointer extends Thread{
                             enemy.clear();
                             enemy.add(new Point(r.nextInt(900), r.nextInt(900)));
                 }  
-          if(crash.checkMyCrash(snake, enemy)==true){
+          if(crash.checkSnakeCrash(snake, enemy)==true){
               for(int i=0; i<snake.size();i++){
                                 Point dead = new Point();
                                 dead = snake.get(i);
@@ -75,14 +79,14 @@ public class Pointer extends Thread{
                             snake.clear();
                             snake.add(new Point(r.nextInt(900), r.nextInt(900)));
           }
-        }*/
+        }
         
-        public void checkBorder(){
+        /*public void checkBorder(){
             if(snake.get(snake.size() - 1).x<15 || snake.get(snake.size() - 1).y<44
                     ||snake.get(snake.size() - 1).x>996||snake.get(snake.size() - 1).y>985){
                 System.exit(0);
             }
-        }
+        }*/
         
  
         public Color checkSpeed(){
@@ -113,12 +117,15 @@ public class Pointer extends Thread{
                         }
                     }
                 }
-                deleteFood(n);
+                board.repaint();
+                //deleteFood(n);
         }
         
         public void showLocationHead(Point last){
             System.out.println(last.x +" | "+last.y);
         }
+        
+        
         
         public void checkFood(){
             if(foods.size() < 100){
@@ -164,13 +171,15 @@ public class Pointer extends Thread{
     public void setSnake(ArrayList<Point> serpiente) {
         this.snake = serpiente;
     }
-    /*
+    
     public ArrayList<Point> getEnemy() {
         return enemy;
     }
 
     public void setEnemy(ArrayList<Point> serpiente) {
         this.enemy = enemy;
-        }*/
+        }
     }
+
+
 
